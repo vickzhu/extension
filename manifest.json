@@ -1,0 +1,38 @@
+{
+  "name": "Hello Extensions",
+  "description": "Base Level Extension",
+  "permissions": [
+	"activeTab",//popup.js与页面通信
+	"scripting",
+	"tabs",
+	"cookies",
+	"storage",
+	"nativeMessaging",
+	"declarativeNetRequest",
+	"declarativeNetRequestWithHostAccess",
+	"declarativeNetRequestFeedback"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "version": "1.0",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "worker.js"
+  },
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": "hello_extensions.png"
+  },
+  "content_scripts": [{
+	"run_at": "document_start",
+	"js": ["contentscript.js"],
+	"matches": [
+		"*://*/*"
+	]
+  }],
+  "web_accessible_resources": [{
+    "resources": ["inject.js"], // <-- Don't forget to add this
+    "matches": ["<all_urls>"]
+  }]
+}
